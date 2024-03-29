@@ -27,6 +27,7 @@
   
   .nav-item {
     margin-right: 13px;
+    position : relative;
   }
   
   .auth-item {
@@ -50,5 +51,28 @@
   }
   
   .styled-link:hover {
-    color: #00C3FF;
+    color: #00a2ff;
+  }
+
+  .dropdown-item {
+    display: block;
+    position: absolute;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    min-width : 180px;
+    padding : 13px;
+    border-radius: 15px;
+  }
+
+  .dropdown-item a{
+    color:black;
+    padding : 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-weight: 500;
+  }
+
+  .dropdown-item a:hover{
+    background-color: #aad6ff;
+    border-radius: 15px;
   }

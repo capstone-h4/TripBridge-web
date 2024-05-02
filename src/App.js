@@ -56,7 +56,7 @@ const App = () => {
   // useEffect to clear localStorage when the app first starts
   useEffect(() => {
     localStorage.clear();
-  }, []);
+  }, []); 
 
   // useEffect to persist login state in local storage
   useEffect(() => {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import SignUp from './pages/user/signup/signup';
 import Nav from './components/header/nav';
 import LogIn from './pages/user/login/login';
@@ -15,53 +15,43 @@ import Filter from './pages/filter/filter-main/filter-main';
 import Section from './pages/filter/section/section';
 import Section2 from './pages/filter/section/section2';
 import Result from './pages/filter/section/result';
-
+import { useNavigate } from 'react-router-dom';
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [nickname, setNickname] = useState('');
   const navigate = useNavigate();
-
   // Function to handle logout
   const handleLogout = () => {
-    localStorage.removeItem('accessToken'); // Remove access token from local storage
+    sessionStorage.removeItem('accessToken');
     setIsLoggedIn(false);
     setNickname('');
     navigate('/');
   };
 
-  // Function to check if user is logged in based on access token
   const checkLoggedIn = () => {
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = sessionStorage.getItem('accessToken');
     if (accessToken) {
-      // User is logged in
       setIsLoggedIn(true);
-      const storedNickname = localStorage.getItem('nickname');
+      const storedNickname = sessionStorage.getItem('nickname');
       if (storedNickname) {
         setNickname(storedNickname);
       } else {
-        setNickname(''); // Ensure nickname is empty if not found in local storage
+        setNickname('');
       }
-    } else {
-      // No access token found, user is logged out
-      setIsLoggedIn(false);
-      setNickname('');
     }
   };
 
-  // useEffect to check login status when component mounts and on every render
   useEffect(() => {
     checkLoggedIn();
-  }, []); // Run once when the component mounts
+  }, []);
 
-  // useEffect to clear localStorage when the app first starts
+  // 로그인 상태를 세션 스토리지에 저장
   useEffect(() => {
-    localStorage.clear();
-  }, []); 
-
-  // useEffect to persist login state in local storage
-  useEffect(() => {
-    localStorage.setItem('isLoggedIn', isLoggedIn);
-  }, [isLoggedIn]); // Run whenever isLoggedIn state changes
+    if (isLoggedIn) {
+      sessionStorage.setItem('accessToken', 'your_access_token_here');
+      sessionStorage.setItem('nickname', nickname);
+    }
+  }, [isLoggedIn, nickname]);
 
   return (
     <div className="App">

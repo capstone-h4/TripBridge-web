@@ -44,6 +44,7 @@ export const sendRequest = async (selectedAreas, selectedTourType, selectedCateg
         image: place.firstimage,
         longitude: place.mapx,
         latitude: place.mapy,
+        id: place.contentid
         //필요한 데이터 추가
       }));
 
@@ -87,8 +88,10 @@ export const sendScrap = async (scrapData) => {
   }
 };
 
+
+
 //스크랩 삭제
-export const deleteScrap = async (scrapId) => {
+export const deleteScrap = async (scrapIdToDelete) => {
   try {
     const token = getToken();
     if (!token) {
@@ -96,7 +99,7 @@ export const deleteScrap = async (scrapId) => {
       return;
     }
 
-    const response = await axios.delete(`${BASE_URL}/storage/${scrapId}`, {
+    const response = await axios.delete(`${BASE_URL}/storage/${scrapIdToDelete}`, {
       headers: {
         Authorization: `Bearer ${token}` // 헤더에 토큰 추가
       }

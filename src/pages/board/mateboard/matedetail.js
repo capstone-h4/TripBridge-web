@@ -126,7 +126,7 @@ const MateDetail = () => {
         return;
       }
       const commentData = {
-        matePost_id: postId,
+        matePostId: postId,
         content: comment,
       };
       await saveComment(commentData, { headers: { Authorization: `Bearer ${token}` } });
@@ -163,9 +163,9 @@ const MateDetail = () => {
         return;
       }
       const commentData = {
-        matePost_id: postId,
+        matePostId: postId,
         content: replyingToContent,
-        parent_comment_id: parentId,
+        parentCommentId: parentId,
       };
       await saveComment(commentData, { headers: { Authorization: `Bearer ${token}` } });
       console.log('대댓글 작성 성공');

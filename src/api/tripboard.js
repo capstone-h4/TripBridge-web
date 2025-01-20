@@ -46,10 +46,10 @@ export const getComments = async (id) => {
     const comments = response.data.map(comment => ({
       id: comment.id,
       content: comment.content,
-      date: comment.created_at,
+      date: comment.createdAt,
       user: comment.userEntity ? comment.userEntity.nickname : 'Unknown',
       parentId: comment.parentComment ? comment.parentComment.id : null, // 부모 댓글의 ID
-      group: comment.comment_group // 댓글의 그룹 정보
+      group: comment.commentGroup // 댓글의 그룹 정보
     }));
 
     // 부모 댓글과 자식 댓글을 매핑하여 구조 변경

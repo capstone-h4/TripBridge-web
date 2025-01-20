@@ -94,7 +94,7 @@ const TripDetail = () => {
             return;
           }
           const commentData = {
-            tripPost_id: postId,
+            tripPostId: postId,
             content: comment,
           };
           await saveComment(commentData, { headers: { Authorization: `Bearer ${token}` } });
@@ -132,9 +132,9 @@ const TripDetail = () => {
             return;
           }
           const commentData = {
-            tripPost_id: postId,
+            tripPostId: postId,
             content: replyingToContent,
-            parent_comment_id: parentId,
+            parentCommentId: parentId,
           };
           await saveComment(commentData, { headers: { Authorization: `Bearer ${token}` } });
           console.log('대댓글 작성 성공');

@@ -67,7 +67,7 @@ export const sendSelectedLocations = async (location, routeorder) => {
       address: location.address,
       latitude: parseFloat(location.latitude).toFixed(6),  // 위도 소수점 6자리로 변환
       longitude: parseFloat(location.longitude).toFixed(6), // 경도 소수점 6자리로 변환
-      route_order: routeorder > 1 ? null : routeorder // route_order가 1 초과일 경우에는 null로 설정
+      routeOrder: routeorder > 1 ? null : routeorder // routeOrder가 1 초과일 경우에는 null로 설정
     };
 
     console.log('보내는 데이터:', postData);
@@ -107,8 +107,8 @@ export const sendSelectedLocations = async (location, routeorder) => {
     let routeData = await responseData.json();
     console.log('"/route" 엔드포인트에서 업데이트된 데이터를 받았습니다.', routeData);
 
-    // 받은 데이터를 route_order 값을 기준으로 정렬합니다.
-    routeData = routeData.sort((a, b) => a.route_order - b.route_order);
+    // 받은 데이터를 routeOrder 값을 기준으로 정렬합니다.
+    routeData = routeData.sort((a, b) => a.routeOrder - b.routeOrder);
 
     return routeData;
     
@@ -169,24 +169,30 @@ export const sendRouteDataToDatabase = async (routeData) => {
 // 저장된 동선을 백엔드로 전송하는 함수
 export const saveRoute = async () => {
   try {
-    const token = getToken();  // 토큰 가져오기
+    const token = getToken();
+    console.log('Token:', token); // 토큰 확인
+
     const response = await fetch(`${BASE_URL}/myroute`, {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${token}`,  // 토큰을 인증 헤더에 포함
+        'Authorization': `Bearer ${token}`,
       },
     });
 
+    console.log('Response status:', response.status); // 응답 상태 확인
+
     if (!response.ok) {
-      throw new Error('Failed to save route');
+      const errorMessage = await response.text();
+      throw new Error(`Failed to save route: ${errorMessage}`);
     }
 
-    return await response.text();  // 성공 시 서버의 응답을 텍스트로 반환
+    return await response.text();
   } catch (error) {
-    console.error('Error saving route:', error);
-    throw error;  // 에러를 상위 호출로 던짐
+    console.error('Error saving route:', error.message);
+    throw error;
   }
 };
+
 
 // Kakao Maps API 키
 const API_KEY = '41269fe83b2600b01b0dc41c4d81616e';

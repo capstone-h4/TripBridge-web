@@ -197,10 +197,10 @@ function Review() {
         <div className="places-list">
         <div className="places">
           {selectedRoute.myPlaces
-            .sort((a, b) => a.route_order - b.route_order)  // route_order로 정렬
+            .sort((a, b) => a.routeOrder - b.routeOrder)  // routeOrder로 정렬
             .map((place) => (
               <div key={place.id} className="place-item">
-                <div className="place-number">{place.route_order}</div>
+                <div className="place-number">{place.routeOrder}</div>
                 <div className="place-content">{place.place}</div>
               </div>
             ))}

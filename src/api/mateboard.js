@@ -4,21 +4,21 @@ const BASE_URL = 'https://api.tripbridge.co.kr';
 
 
 
-//메이트 게시물 불러오는 함수
-export const showMatePost = async () => {
-  try {
-    const response = await axios.get(`${BASE_URL}/mate`);
-    return response.data.map(post => ({
-      id: post.id,
-      title: post.title,
-      user : post.userEntity ? post.userEntity.nickname : 'Unknown',
-      date: post.createdAt
-    }));
-  } catch (error) {
-    console.error('게시물 불러오기 오류:', error);
-    throw error;
-  }
-};
+  //메이트 게시물 불러오는 함수
+  export const showMatePost = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}/mate`);
+      return response.data.map(post => ({
+        id: post.id,
+        title: post.title,
+        user : post.user ? post.user.nickname : 'Unknown',
+        date: post.createdAt
+      }));
+    } catch (error) {
+      console.error('게시물 불러오기 오류:', error);
+      throw error;
+    }
+  };
 
 
 //메이트 게시물 디테일
@@ -29,7 +29,7 @@ export const getMatePostDetail = async (id) => {
       id: response.data.id,
       title: response.data.title,
       content: response.data.content,
-      user : response.data.userEntity ? response.data.userEntity.nickname : 'Unknown',
+      user : response.data.user ? response.data.user.nickname : 'Unknown',
       date: response.data.createdAt
     };
   } catch (error) {
@@ -46,7 +46,7 @@ export const getComments = async (id) => {
       id: comment.id,
       content: comment.content,
       date: comment.createdAt,
-      user: comment.userEntity ? comment.userEntity.nickname : 'Unknown',
+      user: comment.user ? comment.user.nickname : 'Unknown',
       parentId: comment.parentComment ? comment.parentComment.id : null, // 부모 댓글의 ID
       group: comment.commentGroup // 댓글의 그룹 정보
     }));

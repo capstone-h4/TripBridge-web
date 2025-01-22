@@ -12,7 +12,7 @@ export const showTripPost = async () => {
       return response.data.map(post => ({
         id: post.id,
         title: post.title,
-        user : post.userEntity ? post.userEntity.nickname : 'Unknown',
+        user : post.user ? post.user.nickname : 'Unknown',
         date: post.createdAt
       }));
     } catch (error) {
@@ -29,7 +29,7 @@ export const getTripPostDetail = async (id) => {
       id : response.data.id,
       title : response.data.title,
       content : response.data.content,
-      user : response.data.userEntity ? response.data.userEntity.nickname : 'Unknown',
+      user : response.data.user ? response.data.user.nickname : 'Unknown',
       date : response.data.createdAt,
       images: response.data.images.map(image => image.imageUrl)
     };
@@ -46,10 +46,10 @@ export const getComments = async (id) => {
     const comments = response.data.map(comment => ({
       id: comment.id,
       content: comment.content,
-      date: comment.created_at,
-      user: comment.userEntity ? comment.userEntity.nickname : 'Unknown',
+      date: comment.createdAt,
+      user: comment.user ? comment.user.nickname : 'Unknown',
       parentId: comment.parentComment ? comment.parentComment.id : null, // 부모 댓글의 ID
-      group: comment.comment_group // 댓글의 그룹 정보
+      group: comment.commentGroup // 댓글의 그룹 정보
     }));
 
     // 부모 댓글과 자식 댓글을 매핑하여 구조 변경

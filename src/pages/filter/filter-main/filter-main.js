@@ -33,7 +33,7 @@ const Filter = ({ isLoggedIn, nickname }) => {
           )}
           {isLoggedIn && (
             <>
-              <div className="text-user"> {nickname}님 환영합니다! </div>
+              <div className="text-user"> {nickname} 님 환영합니다! </div>
             </>
           )}
           <div className="text-main">여행지 추천</div>
@@ -50,7 +50,7 @@ const Filter = ({ isLoggedIn, nickname }) => {
        {showPopup && (
           <div className="login-modal">
             <div className="login-modal-content">
-              <p>로그인이 필요합니다. 로그인 하시겠습니까?</p>
+              <p>로그인 후 이용이 가능합니다.<br/> 로그인 하시겠습니까?</p>
               <button onClick={() => { closeModal(); navigate('/login'); }}>로그인</button>
               <button onClick={closeModal}>취소</button>
             </div>

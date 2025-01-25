@@ -74,7 +74,7 @@ const Main = () => {
 
   return (
     <div className="main">
-      <div className="banner-text">TRIP BRIDGE22</div>
+      <div className="banner-text">TRIP BRIDGE</div>
       <div className="banner-text2">나만의 여행을 즐길 수 있는 곳, 트립 브릿지</div>
       <div style={{ overflow: 'hidden' }}>
         <Container currentSlide={currentSlide} totalSlides={7}>
